@@ -11,3 +11,4 @@ const robin_blue = Color(0xFF01D4E4);
 const cerulean = Color(0xFF009DE0);
 const rajah = Color(0xFFF9C270);
 const sunshade = Color(0xFFFFAA2B);
+const white_65 = Color(0xA6FFFFFF);

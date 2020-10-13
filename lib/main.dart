@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_ui_concept_solar_system/colors.dart';
 import 'package:flutter_ui_concept_solar_system/screens/detail.dart';
 import 'package:flutter_ui_concept_solar_system/screens/home.dart';
+import 'package:flutter_ui_concept_solar_system/screens/home_screen.dart';
 import 'package:flutter_ui_concept_solar_system/screens/search.dart';
 import 'package:flutter_ui_concept_solar_system/screens/welcome.dart';
 
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/welcome': (context) => WelcomeScreen(),
         '/home': (context) => HomePage(),
+        '/home_screen': (context) => HomeScreen(),
         '/search': (context) => SearchScreen(),
         '/detail': (context) => DetailPage()
       },
