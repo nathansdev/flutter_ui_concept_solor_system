@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_ui_concept_solar_system/colors.dart';
 import 'package:flutter_ui_concept_solar_system/data/planet.dart';
 import 'package:flutter_ui_concept_solar_system/widgets/custom_appbar.dart';
 import 'package:flutter_ui_concept_solar_system/widgets/custom_text.dart';
 import 'package:flutter_ui_concept_solar_system/widgets/search_box.dart';
+
+import 'detail.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({Key key}) : super(key: key);
@@ -20,44 +23,54 @@ class _SearchScreenState extends State<SearchScreen> {
   void initState() {
     super.initState();
     planets.add(Planet(
+        id: 1,
         iconPath: "assets/planets/Earth.svg",
-        title: "Earth",
+        title: "Sol",
         color: electric_violet));
     planets.add(Planet(
+        id: 2,
         iconPath: "assets/planets/Jupiter.svg",
-        title: "Jupiter",
+        title: "Mercú",
         color: electric_violet));
     planets.add(Planet(
+        id: 3,
         iconPath: "assets/planets/Mars.svg",
-        title: "Mars",
+        title: "Vênus",
         color: electric_violet));
     planets.add(Planet(
+        id: 4,
         iconPath: "assets/planets/Mercury.svg",
-        title: "Mercury",
+        title: "Terra",
         color: electric_violet));
     planets.add(Planet(
+        id: 5,
         iconPath: "assets/planets/Neptune.svg",
-        title: "Neptune",
+        title: "Marte",
         color: electric_violet));
     planets.add(Planet(
+        id: 6,
         iconPath: "assets/planets/Pluto.svg",
-        title: "Neptune",
+        title: "Júpiter",
         color: electric_violet));
     planets.add(Planet(
+        id: 7,
         iconPath: "assets/planets/Saturn.svg",
-        title: "Neptune",
+        title: "Saturno",
         color: electric_violet));
     planets.add(Planet(
+        id: 8,
         iconPath: "assets/planets/Sun.svg",
-        title: "Sun",
+        title: "Urânio",
         color: electric_violet));
     planets.add(Planet(
+        id: 9,
         iconPath: "assets/planets/Uranus.svg",
-        title: "Uranus",
+        title: "Netuno",
         color: electric_violet));
     planets.add(Planet(
+        id: 10,
         iconPath: "assets/planets/Venus.svg",
-        title: "Venus",
+        title: "Plutão",
         color: electric_violet));
   }
 
@@ -117,66 +130,96 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
           Flexible(
               child: ListView.builder(
+            padding: EdgeInsets.all(24),
             itemBuilder: (BuildContext context, int index) {
               return GestureDetector(
                 onTap: () {
-                  Navigator.pushNamed(context, "/detail");
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DetailPage(
+                          planet: planets[index],
+                        ),
+                      ));
+                  // Navigator.pushNamed(context, "/detail");
                 },
                 child: Container(
                   height: MediaQuery.of(context).size.height * 0.25,
-                  margin: EdgeInsets.only(top: 8, right: 16, bottom: 8),
-                  padding: EdgeInsets.all(16),
+                  margin: EdgeInsets.only(top: 8, bottom: 8),
                   decoration: BoxDecoration(
                       color: god_gray,
                       borderRadius: BorderRadius.all(Radius.circular(8))),
-                  child: Row(
+                  child: Stack(
                     children: [
-                      Expanded(
-                        child: Icon(Icons.add),
-                        flex: 1,
+                      Positioned(
+                        left: -50,
+                        top: -30,
+                        child: Hero(
+                            tag: planets[index].id,
+                            child: SvgPicture.asset(
+                              planets[index].iconPath,
+                              width: MediaQuery.of(context).size.width * 0.2,
+                              height: MediaQuery.of(context).size.height * 0.25,
+                            )),
                       ),
-                      Expanded(
-                        flex: 1,
-                        child: Column(
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Row(
                           children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                CustomText(
-                                  text: "Netuno",
-                                  size: 32,
-                                  color: Colors.white,
-                                ),
-                                Icon(Icons.bookmark, color: Colors.white)
-                              ],
+                            Expanded(
+                              flex: 1,
+                              child: SizedBox(),
                             ),
-                            Padding(padding: EdgeInsets.all(8)),
-                            CustomText(
-                              size: 14,
-                              color: white_65,
-                              text:
-                                  "Netuno é o oitavo planeta do Sistema Solar, o último a partir do Sol desde a reclassificação...",
-                            ),
-                            Padding(padding: EdgeInsets.all(8)),
-                            Row(
-                              children: [
-                                CustomText(
-                                  size: 14,
-                                  color: Colors.white,
-                                  text: "Continue lendo",
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Icon(
-                                  Icons.arrow_forward,
-                                  color: Colors.white,
-                                )
-                              ],
+                            Expanded(
+                              flex: 1,
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      CustomText(
+                                        text: planets[index].title,
+                                        maxLines: 1,
+                                        size: 32,
+                                        color: Colors.white,
+                                      ),
+                                      Icon(Icons.bookmark_border,
+                                          color: Colors.white)
+                                    ],
+                                  ),
+                                  Padding(padding: EdgeInsets.all(8)),
+                                  CustomText(
+                                    size: 14,
+                                    color: white_65,
+                                    maxLines: 4,
+                                    text:
+                                        "Netuno é o oitavo planeta do Sistema Solar, o último a partir do Sol desde a reclassificação...",
+                                  ),
+                                  Padding(padding: EdgeInsets.all(8)),
+                                  Row(
+                                    children: [
+                                      CustomText(
+                                        size: 14,
+                                        color: Colors.white,
+                                        maxLines: 1,
+                                        text: "Continue lendo",
+                                      ),
+                                      SizedBox(
+                                        width: 10,
+                                      ),
+                                      Icon(
+                                        Icons.arrow_forward,
+                                        color: Colors.white,
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
                             )
                           ],
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),

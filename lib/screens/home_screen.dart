@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_ui_concept_solar_system/data/category.dart';
 import 'package:flutter_ui_concept_solar_system/data/planet.dart';
+import 'package:flutter_ui_concept_solar_system/screens/detail.dart';
 import 'package:flutter_ui_concept_solar_system/widgets/custom_appbar.dart';
 import 'package:flutter_ui_concept_solar_system/widgets/search_box.dart';
 
@@ -43,44 +44,54 @@ class _HomeScreenState extends State<HomeScreen> {
         colorOne: rajah,
         colorTwo: sunshade));
     planets.add(Planet(
+        id: 1,
         iconPath: "assets/planets/Earth.svg",
-        title: "Earth",
+        title: "Sol",
         color: electric_violet));
     planets.add(Planet(
+        id: 2,
         iconPath: "assets/planets/Jupiter.svg",
-        title: "Jupiter",
+        title: "Mercúrio",
         color: electric_violet));
     planets.add(Planet(
+        id: 3,
         iconPath: "assets/planets/Mars.svg",
-        title: "Mars",
+        title: "Vênus",
         color: electric_violet));
     planets.add(Planet(
+        id: 4,
         iconPath: "assets/planets/Mercury.svg",
-        title: "Mercury",
+        title: "Terra",
         color: electric_violet));
     planets.add(Planet(
+        id: 5,
         iconPath: "assets/planets/Neptune.svg",
-        title: "Neptune",
+        title: "Marte",
         color: electric_violet));
     planets.add(Planet(
+        id: 6,
         iconPath: "assets/planets/Pluto.svg",
-        title: "Neptune",
+        title: "Júpiter",
         color: electric_violet));
     planets.add(Planet(
+        id: 7,
         iconPath: "assets/planets/Saturn.svg",
-        title: "Neptune",
+        title: "Saturno",
         color: electric_violet));
     planets.add(Planet(
+        id: 8,
         iconPath: "assets/planets/Sun.svg",
-        title: "Sun",
+        title: "Urânio",
         color: electric_violet));
     planets.add(Planet(
+        id: 9,
         iconPath: "assets/planets/Uranus.svg",
-        title: "Uranus",
+        title: "Netuno",
         color: electric_violet));
     planets.add(Planet(
+        id: 10,
         iconPath: "assets/planets/Venus.svg",
-        title: "Venus",
+        title: "Plutão",
         color: electric_violet));
   }
 
@@ -223,38 +234,73 @@ class _HomeScreenState extends State<HomeScreen> {
               child: ListView.builder(
                 padding: const EdgeInsets.only(left: 24.0),
                 itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    height: MediaQuery.of(context).size.height * 0.3,
-                    width: MediaQuery.of(context).size.height * 0.25,
-                    margin: EdgeInsets.only(top: 8, right: 16, bottom: 8),
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                        color: planets[index].color,
-                        borderRadius: BorderRadius.all(Radius.circular(8))),
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              planets[index].title,
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 14),
+                  return ClipRRect(
+                    borderRadius: BorderRadius.circular(24),
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.3,
+                      width: MediaQuery.of(context).size.height * 0.2,
+                      margin: EdgeInsets.only(top: 8, right: 16, bottom: 8),
+                      decoration: BoxDecoration(
+                          color: god_gray,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(8),
+                              topRight: Radius.circular(8),
+                              bottomLeft: Radius.circular(8),
+                              bottomRight: Radius.circular(8))),
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            left: -50,
+                            top: -30,
+                            child: InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => DetailPage(
+                                        planet: planets[index],
+                                      ),
+                                    ));
+                              },
+                              child: Hero(
+                                tag: planets[index].id,
+                                child: SvgPicture.asset(
+                                  planets[index].iconPath,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.15,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.23,
+                                ),
+                              ),
                             ),
-                            Icon(
-                              Icons.arrow_forward,
-                              color: Colors.white,
-                            )
-                          ],
-                        )
-                      ],
+                          ),
+                          Positioned(
+                            bottom: 20,
+                            left: 20,
+                            right: 20,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  planets[index].title,
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Icon(
+                                  Icons.arrow_forward,
+                                  color: Colors.white,
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                   );
                 },
-                itemCount: categories.length,
+                itemCount: planets.length,
                 scrollDirection: Axis.horizontal,
               ),
             ),

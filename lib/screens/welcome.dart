@@ -69,7 +69,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                       colors: <Color>[burnt_sienna, salmon],
                     ),
                     onTap: () {
-                      Navigator.pushNamed(context, "/home");
+                      Navigator.pushReplacementNamed(context, "/home");
                     },
                   )
                 ],

@@ -14,13 +14,16 @@ class _SearchBoxState extends State<SearchBox> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(16),
+      margin: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+      decoration: BoxDecoration(
+          color: god_gray,
+          borderRadius: BorderRadius.all(Radius.circular(8.0))),
       child: TextField(
         controller: widget.controller,
         style: TextStyle(color: Colors.white),
         decoration: InputDecoration(
             hintText: widget.hint,
-            hintStyle: TextStyle(color: Colors.white),
+            hintStyle: TextStyle(color: white_65),
             prefixIcon: Icon(
               Icons.search,
               color: Colors.white,

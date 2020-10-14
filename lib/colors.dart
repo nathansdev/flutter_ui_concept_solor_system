@@ -12,3 +12,5 @@ const cerulean = Color(0xFF009DE0);
 const rajah = Color(0xFFF9C270);
 const sunshade = Color(0xFFFFAA2B);
 const white_65 = Color(0xA6FFFFFF);
+const gray_75 = Color(0xBF151515);
+const orange_peel = Color(0xFFA000);

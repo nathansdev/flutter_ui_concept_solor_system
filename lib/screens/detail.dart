@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_ui_concept_solar_system/colors.dart';
 import 'package:flutter_ui_concept_solar_system/data/detail.dart';
+import 'package:flutter_ui_concept_solar_system/data/planet.dart';
 import 'package:flutter_ui_concept_solar_system/widgets/custom_text.dart';
 
 class DetailPage extends StatefulWidget {
-  const DetailPage({Key key}) : super(key: key);
+  final Planet planet;
+  const DetailPage({this.planet});
 
   @override
   _DetailPageState createState() => _DetailPageState();
@@ -16,7 +19,7 @@ class _DetailPageState extends State<DetailPage> {
   @override
   void initState() {
     details.add(Detail(
-        text: "Intro",
+        text: "Introdução",
         detail:
             "Marte é o quarto planeta a partir do Sol, o segundo menor do Sistema Solar. Batizado em homenagem ao deus romano da guerra, muitas vezes é descrito como o , porque o óxido de ferro predominante em sua superfície lhe dá uma aparência avermelhada."));
     details.add(Detail(
@@ -41,12 +44,9 @@ class _DetailPageState extends State<DetailPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: BackButton(),
-      ),
       body: Column(
         children: [
-          Header(),
+          Header(planet: widget.planet),
           Title(),
           Flexible(
               child: Content(
@@ -59,18 +59,44 @@ class _DetailPageState extends State<DetailPage> {
 }
 
 class Header extends StatelessWidget {
-  const Header({Key key}) : super(key: key);
+  final Planet planet;
+  const Header({this.planet});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.2,
-      decoration: BoxDecoration(
-        color: god_gray,
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(36),
-          bottomRight: Radius.circular(36),
-        ),
+      height: MediaQuery.of(context).size.height * 0.4,
+      child: Stack(
+        children: [
+          Container(
+            height: MediaQuery.of(context).size.height * 0.35,
+            decoration: BoxDecoration(
+              color: god_gray,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(32),
+                bottomRight: Radius.circular(32),
+              ),
+            ),
+          ),
+          Positioned(
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: Hero(
+                  tag: planet.id,
+                  child: SvgPicture.asset(
+                    planet.iconPath,
+                    width: MediaQuery.of(context).size.height * 0.3,
+                  ))),
+          Positioned(
+              left: 20,
+              top: 60,
+              child: Icon(Icons.arrow_back, color: Colors.white)),
+          Positioned(
+              right: 20,
+              top: 60,
+              child: Icon(Icons.settings, color: Colors.white)),
+        ],
       ),
     );
   }
@@ -84,7 +110,7 @@ class Title extends StatelessWidget {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(24.0),
           child: Row(
             children: [
               Expanded(
@@ -92,6 +118,7 @@ class Title extends StatelessWidget {
                 child: CustomText(
                   text: "Marte",
                   color: Colors.black,
+                  maxLines: 1,
                   size: 32,
                 ),
               ),
@@ -99,11 +126,11 @@ class Title extends StatelessWidget {
                 flex: 1,
                 child: Row(
                   children: [
-                    Icon(Icons.share),
+                    Icon(Icons.bookmark_border),
                     SizedBox(
                       width: 20,
                     ),
-                    Icon(Icons.bookmark),
+                    Icon(Icons.share),
                   ],
                 ),
               ),
@@ -111,12 +138,13 @@ class Title extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 24.0),
           child: CustomText(
             text:
                 "Marte é o quarto planeta a partir do Sol, o segundo menor do Sistema Solar. Batizado em homenagem ao deus romano da guerra, muitas vezes é descrito como o , porque o óxido de ferro predominante em sua superfície lhe dá uma aparência avermelhada.",
-            color: god_gray,
+            color: gray_75,
             size: 16,
+            maxLines: 5,
           ),
         )
       ],
@@ -131,26 +159,25 @@ class Content extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-        padding: EdgeInsets.symmetric(vertical: 16),
+        padding: EdgeInsets.symmetric(vertical: 16, horizontal: 12),
         itemCount: details.length,
         itemBuilder: (BuildContext context, int index) {
           return ExpansionTile(
             title: CustomText(
               color: Colors.black,
-              size: 24,
+              size: 16,
+              maxLines: 1,
               text: details[index].text,
-            ),
-            subtitle: Container(
-              height: 1,
-              color: god_gray,
             ),
             initiallyExpanded: false,
             children: [
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
                 child: CustomText(
                   text: details[index].detail,
-                  color: god_gray,
+                  color: gray_75,
+                  maxLines: 5,
                   size: 16,
                 ),
               )
