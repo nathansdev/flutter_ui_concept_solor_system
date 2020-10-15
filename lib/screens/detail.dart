@@ -47,7 +47,7 @@ class _DetailPageState extends State<DetailPage> {
       body: Column(
         children: [
           Header(planet: widget.planet),
-          Title(),
+          Title(planet: widget.planet),
           Flexible(
               child: Content(
             details: details,
@@ -103,7 +103,8 @@ class Header extends StatelessWidget {
 }
 
 class Title extends StatelessWidget {
-  const Title({Key key}) : super(key: key);
+  final Planet planet;
+  const Title({this.planet});
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +117,7 @@ class Title extends StatelessWidget {
               Expanded(
                 flex: 4,
                 child: CustomText(
-                  text: "Marte",
+                  text: planet.title,
                   color: god_gray,
                   maxLines: 1,
                   size: 32,
