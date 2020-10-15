@@ -125,6 +125,7 @@ class _SearchScreenState extends State<SearchScreen> {
       body: Column(
         children: [
           SearchBox(
+            enable: true,
             controller: controller,
             hint: "Procure planetas, asteroides, estrelas...",
           ),
@@ -141,86 +142,92 @@ class _SearchScreenState extends State<SearchScreen> {
                           planet: planets[index],
                         ),
                       ));
-                  // Navigator.pushNamed(context, "/detail");
                 },
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.25,
-                  margin: EdgeInsets.only(top: 8, bottom: 8),
-                  decoration: BoxDecoration(
-                      color: god_gray,
-                      borderRadius: BorderRadius.all(Radius.circular(8))),
-                  child: Stack(
-                    children: [
-                      Positioned(
-                        left: -50,
-                        top: -30,
-                        child: Hero(
-                            tag: planets[index].id,
-                            child: SvgPicture.asset(
-                              planets[index].iconPath,
-                              width: MediaQuery.of(context).size.width * 0.2,
-                              height: MediaQuery.of(context).size.height * 0.25,
-                            )),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: SizedBox(),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Column(
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(8),
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.25,
+                      decoration: BoxDecoration(
+                          color: god_gray,
+                          borderRadius: BorderRadius.all(Radius.circular(8))),
+                      child: Stack(
+                        children: [
+                          Positioned(
+                            left: -50,
+                            top: -30,
+                            child: Hero(
+                                tag: planets[index].id,
+                                child: SvgPicture.asset(
+                                  planets[index].iconPath,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.2,
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.25,
+                                )),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  flex: 1,
+                                  child: SizedBox(),
+                                ),
+                                Expanded(
+                                  flex: 1,
+                                  child: Column(
                                     children: [
-                                      CustomText(
-                                        text: planets[index].title,
-                                        maxLines: 1,
-                                        size: 32,
-                                        color: Colors.white,
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          CustomText(
+                                            text: planets[index].title,
+                                            maxLines: 1,
+                                            size: 32,
+                                            color: Colors.white,
+                                          ),
+                                          Icon(Icons.bookmark_border,
+                                              color: white_65)
+                                        ],
                                       ),
-                                      Icon(Icons.bookmark_border,
-                                          color: Colors.white)
-                                    ],
-                                  ),
-                                  Padding(padding: EdgeInsets.all(8)),
-                                  CustomText(
-                                    size: 14,
-                                    color: white_65,
-                                    maxLines: 4,
-                                    text:
-                                        "Netuno é o oitavo planeta do Sistema Solar, o último a partir do Sol desde a reclassificação...",
-                                  ),
-                                  Padding(padding: EdgeInsets.all(8)),
-                                  Row(
-                                    children: [
+                                      Padding(padding: EdgeInsets.all(8)),
                                       CustomText(
                                         size: 14,
-                                        color: Colors.white,
-                                        maxLines: 1,
-                                        text: "Continue lendo",
+                                        color: white_65,
+                                        maxLines: 4,
+                                        text:
+                                            "Netuno é o oitavo planeta do Sistema Solar, o último a partir do Sol desde a reclassificação...",
                                       ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Icon(
-                                        Icons.arrow_forward,
-                                        color: Colors.white,
+                                      Padding(padding: EdgeInsets.all(8)),
+                                      Row(
+                                        children: [
+                                          CustomText(
+                                            size: 14,
+                                            color: Colors.white,
+                                            maxLines: 1,
+                                            text: "Continue lendo",
+                                          ),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Icon(
+                                            Icons.arrow_forward,
+                                            color: salmon,
+                                          )
+                                        ],
                                       )
                                     ],
-                                  )
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
               );

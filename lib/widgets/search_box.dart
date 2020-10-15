@@ -4,7 +4,8 @@ import 'package:flutter_ui_concept_solar_system/colors.dart';
 class SearchBox extends StatefulWidget {
   final TextEditingController controller;
   final String hint;
-  SearchBox({this.controller, this.hint});
+  final bool enable;
+  SearchBox({this.controller, this.hint, this.enable});
 
   @override
   _SearchBoxState createState() => _SearchBoxState();
@@ -19,6 +20,7 @@ class _SearchBoxState extends State<SearchBox> {
           color: god_gray,
           borderRadius: BorderRadius.all(Radius.circular(8.0))),
       child: TextField(
+        enabled: widget.enable,
         controller: widget.controller,
         style: TextStyle(color: Colors.white),
         decoration: InputDecoration(

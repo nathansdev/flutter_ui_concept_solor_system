@@ -153,9 +153,15 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SearchBox(
-              controller: controller,
-              hint: "Procure planetas, asteroides, estrelas...",
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, "/search");
+              },
+              child: SearchBox(
+                enable: false,
+                controller: controller,
+                hint: "Procure planetas, asteroides, estrelas...",
+              ),
             ),
             SizedBox(
               height: 20,
@@ -234,68 +240,72 @@ class _HomeScreenState extends State<HomeScreen> {
               child: ListView.builder(
                 padding: const EdgeInsets.only(left: 24.0),
                 itemBuilder: (BuildContext context, int index) {
-                  return ClipRRect(
-                    borderRadius: BorderRadius.circular(24),
-                    child: Container(
-                      height: MediaQuery.of(context).size.height * 0.3,
-                      width: MediaQuery.of(context).size.height * 0.2,
-                      margin: EdgeInsets.only(top: 8, right: 16, bottom: 8),
-                      decoration: BoxDecoration(
-                          color: god_gray,
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(8),
-                              topRight: Radius.circular(8),
-                              bottomLeft: Radius.circular(8),
-                              bottomRight: Radius.circular(8))),
-                      child: Stack(
-                        children: [
-                          Positioned(
-                            left: -50,
-                            top: -30,
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => DetailPage(
-                                        planet: planets[index],
-                                      ),
-                                    ));
-                              },
-                              child: Hero(
-                                tag: planets[index].id,
-                                child: SvgPicture.asset(
-                                  planets[index].iconPath,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.15,
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.23,
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DetailPage(
+                              planet: planets[index],
+                            ),
+                          ));
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          top: 8.0, bottom: 8.0, right: 16.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Container(
+                          height: MediaQuery.of(context).size.height * 0.3,
+                          width: MediaQuery.of(context).size.height * 0.2,
+                          decoration: BoxDecoration(
+                              color: god_gray,
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(0),
+                                  topRight: Radius.circular(0),
+                                  bottomLeft: Radius.circular(0),
+                                  bottomRight: Radius.circular(0))),
+                          child: Stack(
+                            children: [
+                              Positioned(
+                                left: -50,
+                                top: -30,
+                                child: Hero(
+                                  tag: planets[index].id,
+                                  child: SvgPicture.asset(
+                                    planets[index].iconPath,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.15,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.23,
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
-                          Positioned(
-                            bottom: 20,
-                            left: 20,
-                            right: 20,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  planets[index].title,
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
+                              Positioned(
+                                bottom: 20,
+                                left: 20,
+                                right: 20,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      planets[index].title,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Icon(
+                                      Icons.arrow_forward,
+                                      color: salmon,
+                                    )
+                                  ],
                                 ),
-                                Icon(
-                                  Icons.arrow_forward,
-                                  color: Colors.white,
-                                )
-                              ],
-                            ),
-                          )
-                        ],
+                              )
+                            ],
+                          ),
+                        ),
                       ),
                     ),
                   );

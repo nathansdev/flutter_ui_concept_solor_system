@@ -117,7 +117,7 @@ class Title extends StatelessWidget {
                 flex: 4,
                 child: CustomText(
                   text: "Marte",
-                  color: Colors.black,
+                  color: god_gray,
                   maxLines: 1,
                   size: 32,
                 ),
@@ -126,11 +126,17 @@ class Title extends StatelessWidget {
                 flex: 1,
                 child: Row(
                   children: [
-                    Icon(Icons.bookmark_border),
+                    Icon(
+                      Icons.bookmark_border,
+                      color: god_gray,
+                    ),
                     SizedBox(
                       width: 20,
                     ),
-                    Icon(Icons.share),
+                    Icon(
+                      Icons.share,
+                      color: god_gray,
+                    ),
                   ],
                 ),
               ),

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:flutter_ui_concept_solar_system/colors.dart';
+import 'package:flutter_ui_concept_solar_system/screens/bookmark.dart';
+import 'package:flutter_ui_concept_solar_system/screens/gallery.dart';
 import 'package:flutter_ui_concept_solar_system/screens/home_screen.dart';
 import 'package:flutter_ui_concept_solar_system/screens/search.dart';
 
@@ -24,8 +27,8 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     widgets.add(HomeScreen());
     widgets.add(SearchScreen());
-    widgets.add(HomeScreen());
-    widgets.add(SearchScreen());
+    widgets.add(BookmarkScreen());
+    widgets.add(GalleryPage());
     super.initState();
   }
 
@@ -53,14 +56,15 @@ class _HomePageState extends State<HomePage> {
                 icon: Icon(Icons.search),
               ),
               BottomNavigationBarItem(
-                title: Text("Bookmark"),
+                title: Text("Save"),
                 icon: Icon(Icons.bookmark),
               ),
               BottomNavigationBarItem(
-                title: Text("More"),
-                icon: Icon(Icons.more),
+                title: Text("Gallery"),
+                icon: Icon(Icons.image),
               ),
             ],
+            unselectedItemColor: white_65,
             currentIndex: _selectedIndex,
             selectedItemColor: Colors.white,
             onTap: _onItemTapped,
